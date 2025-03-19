@@ -29,5 +29,7 @@ public class DominoTouchGroundHanlder : MonoBehaviour
         {
             //FirstDomino.AddForce();
         }
+
+        MatchSystem.Instance.CameraGoToNexDominoSpawn();
     }
 }
