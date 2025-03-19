@@ -7,8 +7,20 @@ using UnityEngine;
 
 public class DominoPiece : MonoBehaviour
 {
+    [SerializeField] private Rigidbody _rb;
+
+    private void Reset()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        _rb.isKinematic = true;
+    }
+
     public void Activate()
     {
-
+        _rb.isKinematic = false;
     }
 }
