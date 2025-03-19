@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DominoPiece : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _rb;
+    [SerializeField] public Rigidbody _rb;
 
     private bool _hadTouchedGround;
 
