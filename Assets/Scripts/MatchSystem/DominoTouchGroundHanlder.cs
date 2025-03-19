@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class DominoTouchGroundHanlder : MonoBehaviour
@@ -26,8 +27,11 @@ public class DominoTouchGroundHanlder : MonoBehaviour
         }
 
         if (DominosCount == 5)
-        {
-            //FirstDomino.AddForce();
+        { 
+            var forcePosition = FirstDomino.transform.position + new Vector3(0,0.5f,0);
+            var direction = new Vector3(1,0,0);
+            var force = 50f;
+            FirstDomino.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(direction*force, forcePosition);
         }
 
         //MatchSystem.Instance.CameraGoToNexDominoSpawn();
