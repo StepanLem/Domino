@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7112698669121372538}
   - component: {fileID: 3908984180380818118}
   - component: {fileID: 8220479910777783599}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Domino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
