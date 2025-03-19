@@ -33,7 +33,5 @@ public class DominoTouchGroundHanlder : MonoBehaviour
             var force = 50f;
             FirstDomino.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(direction*force, forcePosition);
         }
-
-        //MatchSystem.Instance.CameraGoToNexDominoSpawn();
     }
 }

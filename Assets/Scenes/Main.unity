@@ -405,6 +405,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!4 &614391913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+  m_PrefabInstance: {fileID: 34437431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &771907322
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +421,7 @@ GameObject:
   - component: {fileID: 771907324}
   - component: {fileID: 771907323}
   - component: {fileID: 771907325}
+  - component: {fileID: 771907326}
   m_Layer: 0
   m_Name: GameScripts
   m_TagString: Untagged
@@ -469,6 +475,23 @@ MonoBehaviour:
   OffsetBetweenDominoSpawnPoints: {x: 2.18, y: 0, z: 0}
   CameraOffsetFromDominoSpawn: {x: 0, y: 0, z: -3.06}
   CameraMoveSpeed: 3.21
+--- !u!114 &771907326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771907322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc625e621a9250479ba26d109fa1b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 614391913}
+  PlatformPrefab: {fileID: 1491322898082473624, guid: 3e3917639d61b2043ac54d0cb0157f99, type: 3}
+  FirstPlatformTransform: {fileID: 487889031}
+  platfromLength: 9.681248
+  platformsAhead: 3
 --- !u!1 &802306570
 GameObject:
   m_ObjectHideFlags: 0
