@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7112698669121372538}
   - component: {fileID: 3908984180380818118}
   - component: {fileID: 8220479910777783599}
+  - component: {fileID: 120588212252921964}
   m_Layer: 0
   m_Name: Domino
   m_TagString: Untagged
@@ -150,3 +151,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &120588212252921964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177914617516068725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e25f7fb44561d4d8c7c52ba148613c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
