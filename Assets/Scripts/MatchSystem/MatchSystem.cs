@@ -23,10 +23,11 @@ public class MatchSystem : MonoBehaviour
 
     public void CameraGoToNexDominoSpawn()
     {
-        var nextDominoSpawn = CurrentDominoSpawn.position + offsetBetweenDominoSpawnPoints;
-        var nextCameraPosition = nextDominoSpawn + CameraOffsetFromDominoSpawn;
+        var nextDominoSpawnPosition = CurrentDominoSpawn.position + offsetBetweenDominoSpawnPoints;
+        CurrentDominoSpawn.position = nextDominoSpawnPosition;
+        var nextCameraPosition = nextDominoSpawnPosition + CameraOffsetFromDominoSpawn;
 
-        CameraGoSmoothlyTo(nextCameraPosition);
+        StartCoroutine(CameraGoSmoothlyTo(nextCameraPosition));
     }
 
     public float CameraMoveSpeed;
