@@ -7,23 +7,23 @@ using UnityEngine;
 
 public class DominoPiece : MonoBehaviour
 {
-    [SerializeField] public Rigidbody _rb;
+    [SerializeField] public LeftToRightMover _rb;
 
     private bool _hadTouchedGround;
 
     private void Reset()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<LeftToRightMover>();
     }
 
     private void Start()
     {
-        _rb.isKinematic = true;
+        _rb.enabled = true;
     }
 
     public void Activate()
     {
-        _rb.isKinematic = false;
+        _rb.enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)
