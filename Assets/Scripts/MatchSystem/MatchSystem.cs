@@ -17,13 +17,13 @@ public class MatchSystem : MonoBehaviour
 
     public Transform CurrentDominoSpawn;
 
-    private Vector3 offsetBetweenDominoSpawnPoints;
+    public Vector3 OffsetBetweenDominoSpawnPoints;
 
-    private Vector3 CameraOffsetFromDominoSpawn;
+    public Vector3 CameraOffsetFromDominoSpawn;
 
     public void CameraGoToNexDominoSpawn()
     {
-        var nextDominoSpawnPosition = CurrentDominoSpawn.position + offsetBetweenDominoSpawnPoints;
+        var nextDominoSpawnPosition = CurrentDominoSpawn.position + OffsetBetweenDominoSpawnPoints;
         CurrentDominoSpawn.position = nextDominoSpawnPosition;
         var nextCameraPosition = nextDominoSpawnPosition + CameraOffsetFromDominoSpawn;
 
