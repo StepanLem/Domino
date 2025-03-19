@@ -9,6 +9,8 @@ public class DominoPiece : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rb;
 
+    private bool _hadTouchedGround;
+
     private void Reset()
     {
         _rb = GetComponent<Rigidbody>();
@@ -26,7 +28,10 @@ public class DominoPiece : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (!_hadTouchedGround && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            _hadTouchedGround = true;
             DominoTouchGroundHanlder.Instance.HandleNewDominoTouchGround(this);
+        }  
     }
 }
