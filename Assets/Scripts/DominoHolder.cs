@@ -8,6 +8,7 @@ public class DominoHolder : MonoBehaviour
     [SerializeField] private GameObject Prefab;
     private bool IsHolding;
     private GameObject ActivePiece;
+    [SerializeField] private Transform WorldOrigin;
     public UnityEvent OnDrop;
 
     private void Start()
@@ -23,6 +24,8 @@ public class DominoHolder : MonoBehaviour
         }
         IsHolding = false;
         ActivePiece.GetComponent<DominoPiece>().Activate();
+        ActivePiece.transform.parent = WorldOrigin;
+        OnDrop?.Invoke();
         StartCoroutine(Wait());
     }
 

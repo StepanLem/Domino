@@ -16,7 +16,7 @@ public class MoveProgress : MonoBehaviour
 
     public void MoveOneStep()
     {
-        IsStatic = true;
+        IsStatic = false;
         StartCoroutine(Move());
     }
 
@@ -27,8 +27,9 @@ public class MoveProgress : MonoBehaviour
         {
             var velocity = distancePerFrame * MovementDirecation;
             distance = Mathf.Min(distancePerStep, distance + velocity.magnitude);
+            transform.position += velocity;
             yield return new WaitForFixedUpdate();
         }
-        IsStatic = false;
+        IsStatic = true;
     }
 }
