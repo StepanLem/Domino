@@ -23,4 +23,10 @@ public class DominoPiece : MonoBehaviour
     {
         _rb.isKinematic = false;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            DominoTouchGroundHanlder.Instance.HandleNewDominoTouchGround(this);
+    }
 }
