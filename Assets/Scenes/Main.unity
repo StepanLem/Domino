@@ -419,7 +419,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771907324}
-  - component: {fileID: 771907323}
   - component: {fileID: 771907325}
   - component: {fileID: 771907326}
   m_Layer: 0
@@ -429,20 +428,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &771907323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771907322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1993271ba7fa60448154843fed55b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DominosCount: 0
-  FirstDomino: {fileID: 0}
 --- !u!4 &771907324
 Transform:
   m_ObjectHideFlags: 0
@@ -470,6 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6329acb434e4a0440a2c1385e61eddd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dominoes: []
+  dominoesConnectedFromStartCount: 0
   Camera: {fileID: 0}
   CurrentDominoSpawn: {fileID: 802306571}
   OffsetBetweenDominoSpawnPoints: {x: 2.18, y: 0, z: 0}

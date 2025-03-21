@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 454574445036861828}
+  Rigidbody: {fileID: 8220479910777783599}
+  ID: 0
 --- !u!54 &8220479910777783599
 Rigidbody:
   m_ObjectHideFlags: 0

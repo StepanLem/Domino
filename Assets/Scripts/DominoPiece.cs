@@ -9,7 +9,12 @@ public class DominoPiece : MonoBehaviour
 {
     [SerializeField] public LeftToRightMover _rb;
 
+    public Rigidbody Rigidbody;
+
     private bool _hadTouchedGround;
+    private bool _wasTouchedByPreviousDomino;
+
+    public int ID;
 
     private void Reset()
     {
@@ -31,7 +36,17 @@ public class DominoPiece : MonoBehaviour
         if (!_hadTouchedGround && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             _hadTouchedGround = true;
-            DominoTouchGroundHanlder.Instance.HandleNewDominoTouchGround(this);
-        }  
+            MatchSystem.Instance.HandleNewDominoTouchGround(this);
+        }
+
+        if (!_wasTouchedByPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
+        {
+            collision.gameObject.TryGetComponent<DominoPiece>(out var previousDomino);
+            if (previousDomino.ID + 1 == this.ID)
+            {
+                _wasTouchedByPreviousDomino = true;
+                MatchSystem.Instance.HandleDominoFirstTouchWithPrevious(previousDomino, this);
+            }
+        }
     }
 }
