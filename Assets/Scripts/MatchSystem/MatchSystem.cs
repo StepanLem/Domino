@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MatchSystem : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class MatchSystem : MonoBehaviour
     public int lastConnectedDominoId;
 
     public static int CountOfDominoBetweenFrozenAndActiveDomino = 5;
+
+    public UnityEvent<int> CounterIncrement;
 
     public void HandleNewDominoTouchGround(DominoPiece activeDomino)
     {
@@ -92,6 +95,7 @@ public class MatchSystem : MonoBehaviour
 
         //Увеличиваем счётчик коснувшихся домино.
         lastConnectedDominoId++;
+        CounterIncrement?.Invoke(lastConnectedDominoId);
 
         //Визуально выделяем две доминошки
         FirstFrozenDomino.Outline.enabled = true;
