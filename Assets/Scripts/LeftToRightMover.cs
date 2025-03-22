@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LeftToRightMover : SineMover
 {
     [SerializeField] private float Amplitude;
     [SerializeField] private Rigidbody rb;
+    public UnityEvent OnLaunch;
     private float cached;
 
     private void Reset()
@@ -39,5 +41,6 @@ public class LeftToRightMover : SineMover
     {
         rb.useGravity = true;
         rb.linearVelocity = Vector3.zero;
+        OnLaunch?.Invoke();
     }
 }

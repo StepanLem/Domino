@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DominoPiece : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DominoPiece : MonoBehaviour
 
     public Rigidbody Rigidbody;
     public Outline Outline;
+    public UnityEvent OnHitGround;
+    public UnityEvent OnPieceImpact;
 
     private bool _hadTouchedGround;
     private bool _wasTouchedByPreviousDomino;
@@ -38,6 +41,7 @@ public class DominoPiece : MonoBehaviour
         {
             _hadTouchedGround = true;
             MatchSystem.Instance.HandleNewDominoTouchGround(this);
+            OnHitGround?.Invoke();
         }
 
         if (!_wasTouchedByPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
@@ -47,6 +51,7 @@ public class DominoPiece : MonoBehaviour
             {
                 _wasTouchedByPreviousDomino = true;
                 MatchSystem.Instance.HandleDominoFirstTouchWithPrevious(previousDomino, this);
+                OnPieceImpact?.Invoke();
             }
         }
     }
