@@ -44,20 +44,24 @@ public class MatchSystem : MonoBehaviour
     {
         if (Dominoes.Count > CountOfDominoBetweenFrozenAndActiveDomino)
         {
-            //МБ перенести это на "При бросске?"
-
             if (FirstFrozenDomino == null || SecondFrozenDomino == null)
             {
                 Debug.LogError("Нельзя давать игроку ставить новые фигуры, пока старые не коснулись");
                 return;
             }
 
-            UnfreezeDominoes();
+            UnfreezeDominoes(FirstFrozenDomino, SecondFrozenDomino);
 
-            //TODO: отключаем шейдер, делающий обводку для обоих
+            //отключаем шейдер, делающий обводку для обоих
+            FirstFrozenDomino.Outline.enabled = false;
+            SecondFrozenDomino.Outline.enabled = false;
 
             //Аудио
             //TODO: звук отмораживания.
+
+
+            FirstFrozenDomino = null;
+            SecondFrozenDomino = null;
         }
     }
 
@@ -80,14 +84,18 @@ public class MatchSystem : MonoBehaviour
             //+ тут внутри переменные сохраняют состояние. может быть ошибка.
             return;
         }
-            
-        FreezeDominoes(previousDomino, domino);
+
+        FirstFrozenDomino = previousDomino;
+        SecondFrozenDomino = domino;
+
+        FreezeDominoes(FirstFrozenDomino, SecondFrozenDomino);
 
         //Увеличиваем счётчик коснувшихся домино.
         lastConnectedDominoId++;
 
         //Визуально выделяем две доминошки
-        //TODO: включить шейдер, делающий обводку для обоих
+        FirstFrozenDomino.Outline.enabled = true;
+        SecondFrozenDomino.Outline.enabled = true;
 
         //Аудио
         //TODO: звук соприкосновения доминошек. И звук замораживания(как в зельде)
@@ -98,9 +106,6 @@ public class MatchSystem : MonoBehaviour
 
     public void FreezeDominoes(DominoPiece previousDomino, DominoPiece domino)
     {
-        FirstFrozenDomino = previousDomino;
-        SecondFrozenDomino = domino;
-
         //запоминаем скорость перед заморозкой домино.
         _FirstFrozenDominoLinearVelocity = previousDomino.Rigidbody.linearVelocity;
         _FirstFrozenDominoAngularVelocity = previousDomino.Rigidbody.angularVelocity;
@@ -112,18 +117,15 @@ public class MatchSystem : MonoBehaviour
         domino.Rigidbody.isKinematic = true;
     }
 
-    public void UnfreezeDominoes()
+    public void UnfreezeDominoes(DominoPiece previousDomino, DominoPiece domino)
     {
-        FirstFrozenDomino.Rigidbody.isKinematic = false;
-        SecondFrozenDomino.Rigidbody.isKinematic = false;
+        previousDomino.Rigidbody.isKinematic = false;
+        domino.Rigidbody.isKinematic = false;
 
-        FirstFrozenDomino.Rigidbody.linearVelocity = _FirstFrozenDominoLinearVelocity;
-        FirstFrozenDomino.Rigidbody.angularVelocity = _FirstFrozenDominoAngularVelocity;
-        SecondFrozenDomino.Rigidbody.linearVelocity = _SecondFrozenDominoLinearVelocity;
-        SecondFrozenDomino.Rigidbody.angularVelocity = _SecondFrozenDominoAngularVelocity;
-
-        FirstFrozenDomino = null;
-        SecondFrozenDomino = null;
+        previousDomino.Rigidbody.linearVelocity = _FirstFrozenDominoLinearVelocity;
+        previousDomino.Rigidbody.angularVelocity = _FirstFrozenDominoAngularVelocity;
+        domino.Rigidbody.linearVelocity = _SecondFrozenDominoLinearVelocity;
+        domino.Rigidbody.angularVelocity = _SecondFrozenDominoAngularVelocity;
     }
 
 

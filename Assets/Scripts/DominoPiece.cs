@@ -10,6 +10,7 @@ public class DominoPiece : MonoBehaviour
     [SerializeField] public LeftToRightMover _rb;
 
     public Rigidbody Rigidbody;
+    public Outline Outline;
 
     private bool _hadTouchedGround;
     private bool _wasTouchedByPreviousDomino;

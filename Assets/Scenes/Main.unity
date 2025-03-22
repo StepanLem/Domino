@@ -129,10 +129,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
@@ -140,7 +144,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 771907325}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 771907325}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
@@ -148,11 +160,23 @@ PrefabInstance:
       value: TryUnfreezeDominos
       objectReference: {fileID: 0}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: TryUnfreezeDominos
+      objectReference: {fileID: 0}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: MatchSystem, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MatchSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 535721747626367702, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2119665242027873341, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
@@ -201,7 +225,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.49
+      value: -1.517
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.423
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9961052
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.088172615
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567413480691906976, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -10.117
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
