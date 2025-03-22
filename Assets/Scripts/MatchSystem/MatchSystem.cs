@@ -37,7 +37,12 @@ public class MatchSystem : MonoBehaviour
             var force = 50f;
             Dominoes[0].Rigidbody.AddForceAtPosition(direction * force, forcePosition);
         }
-        else if (Dominoes.Count > CountOfDominoBetweenFrozenAndActiveDomino)
+        
+    }
+
+    public void TryUnfreezeDominos()
+    {
+        if (Dominoes.Count > CountOfDominoBetweenFrozenAndActiveDomino)
         {
             //МБ перенести это на "При бросске?"
 
