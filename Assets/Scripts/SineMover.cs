@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class SineMover : MonoBehaviour
 {
-    private float t;
-    [SerializeField] private float cycleDuration;
-    [SerializeField] private float offset;
-    private float sine => Mathf.Sin(offset + t / cycleDuration);
+    public float t { get; protected set; }
+    [SerializeField] public float cycleDuration;
+    [SerializeField] public float offset;
+    public float sine => Mathf.Sin((offset + t) / cycleDuration);
 
     public void FixedUpdate()
     {

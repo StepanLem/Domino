@@ -135,7 +135,7 @@ Rigidbody:
   m_GameObject: {fileID: 8177914617516068725}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1.94
+  m_Drag: 0.9
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -167,5 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleDuration: 0.4
   offset: 0
-  Amplitude: 25
+  Amplitude: 0.75
   rb: {fileID: 8220479910777783599}

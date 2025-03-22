@@ -16,11 +16,18 @@ public class LeftToRightMover : SineMover
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        offset = (UnityEngine.Random.value - 0.5f) * 4 * Mathf.PI * cycleDuration;
+        transform.position += Vector3.left * sine * Amplitude;
+        cached = sine;
+    }
+
     protected override void Apply(float sine)
     {
         var delta = sine - cached;
         cached = sine;
-        rb.linearVelocity = Vector3.left * delta * Amplitude;
+        transform.position += Vector3.left * delta * Amplitude;
     }
 
     private void OnEnable()
@@ -31,5 +38,6 @@ public class LeftToRightMover : SineMover
     private void OnDisable()
     {
         rb.useGravity = true;
+        rb.linearVelocity = Vector3.zero;
     }
 }
