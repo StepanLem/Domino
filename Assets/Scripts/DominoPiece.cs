@@ -17,6 +17,7 @@ public class DominoPiece : MonoBehaviour
 
     private bool _hadTouchedGround;
     private bool _wasTouchedByPreviousDomino;
+    public bool IsNowInCollisionWithPreviousDomino;
 
     public int ID;
 
@@ -49,8 +50,22 @@ public class DominoPiece : MonoBehaviour
             collision.gameObject.TryGetComponent<DominoPiece>(out var previousDomino);
             if (previousDomino.ID + 1 == this.ID)
             {
+                IsNowInCollisionWithPreviousDomino = true;
                 _wasTouchedByPreviousDomino = true;
                 MatchSystem.Instance.HandleDominoFirstTouchWithPrevious(previousDomino, this);
+                OnPieceImpact?.Invoke();
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (!IsNowInCollisionWithPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
+        {
+            collision.gameObject.TryGetComponent<DominoPiece>(out var previousDomino);
+            if (previousDomino.ID + 1 == this.ID)
+            {
+                IsNowInCollisionWithPreviousDomino = true;
                 OnPieceImpact?.Invoke();
             }
         }

@@ -77,10 +77,12 @@ public class MatchSystem : MonoBehaviour
     private Vector3 _SecondFrozenDominoLinearVelocity;
     private Vector3 _SecondFrozenDominoAngularVelocity;
 
-    public void HandleDominoFirstTouchWithPrevious(DominoPiece previousDomino, DominoPiece domino)
+    public void HandleDominoFirstTouchWithPrevious(DominoPiece previousDomino, DominoPiece currentDomino)
     {
         if (previousDomino.ID != lastConnectedDominoId)
         {
+            //коснулс€ заранее.
+
             Debug.Log("¬от этой фигни быть не должно. Ќеправильно будет работать при следующем взаимодействии. " +
                 "–ассмотрите как это произошло?");
             //скорее всего это произошло если игрок соеденил домино в середине игры сам. ј значит мог уронить.
@@ -89,7 +91,7 @@ public class MatchSystem : MonoBehaviour
         }
 
         FirstFrozenDomino = previousDomino;
-        SecondFrozenDomino = domino;
+        SecondFrozenDomino = currentDomino;
 
         FreezeDominoes(FirstFrozenDomino, SecondFrozenDomino);
 
@@ -101,12 +103,16 @@ public class MatchSystem : MonoBehaviour
         FirstFrozenDomino.Outline.enabled = true;
         SecondFrozenDomino.Outline.enabled = true;
 
-        //јудио
-        //TODO: звук соприкосновени€ доминошек. » звук замораживани€(как в зельде)
+        var nextDomino = Dominoes[lastConnectedDominoId + 1];
+        if (nextDomino.IsNowInCollisionWithPreviousDomino)
+        {
+            //TODO: ждЄм секунду чтобы игрок заметил прикосновение, а потом.
+
+            TryUnfreezeDominos();
+
+            HandleDominoFirstTouchWithPrevious(currentDomino, nextDomino);
+        }
     }
-
-
-
 
     public void FreezeDominoes(DominoPiece previousDomino, DominoPiece domino)
     {
@@ -132,9 +138,13 @@ public class MatchSystem : MonoBehaviour
         domino.Rigidbody.angularVelocity = _SecondFrozenDominoAngularVelocity;
     }
 
+    public bool CheckLoose(int countOfSpawnedDomino)
+    {
+        if (lastConnectedDominoId + CountOfDominoBetweenFrozenAndActiveDomino < countOfSpawnedDomino)
+            return true;
 
-
-
+        return false;
+    }
 
     #region CameraLogic(didnt used)
     public Transform Camera;
