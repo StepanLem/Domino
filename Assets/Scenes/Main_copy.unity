@@ -567,9 +567,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 614391913}
   PlatformPrefab: {fileID: 1491322898082473624, guid: 3e3917639d61b2043ac54d0cb0157f99, type: 3}
-  FirstPlatform: {fileID: 0}
-  CameraOffsetToSpawnPlatform: 0.43
-  platformsAhead: 3
+  FirstPlatform: {fileID: 2084041977}
+  AllowedCameraOffsetToLastPlatform: -20
+  SpawnOnAwake: 3
   ColorGradient:
     serializedVersion: 2
     key0: {r: 0.4747653, g: 1, b: 0, a: 1}
@@ -600,12 +600,13 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
-  MaxLength: 1.37
-  MinLength: 0.86
-  MaxYGlobal: 5.27
-  MinYGlobal: 2.83
-  MaxYFromPrev: 0.51
-  MinYFromPrev: -1.82
+  GradientStep: 0.03
+  MaxLength: 4.23
+  MinLength: 1.16
+  MaxYGlobal: 1.39
+  MinYGlobal: -1.62
+  MaxYFromPrev: 0.39
+  MinYFromPrev: -0.36
 --- !u!1 &802306570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1316,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2084041977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7428175686726889285, guid: 3e3917639d61b2043ac54d0cb0157f99, type: 3}
+  m_PrefabInstance: {fileID: 1817438126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72075a32781587748aba33591200341e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2097587962
 GameObject:
   m_ObjectHideFlags: 0

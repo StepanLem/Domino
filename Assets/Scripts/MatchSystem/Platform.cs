@@ -4,7 +4,7 @@ public class Platform : MonoBehaviour
 {
     public Transform LeftTopPoint;
     public Transform RightTopPoint;
-    public Material Material;
+    public Renderer Renderer;
 
     public void SetParams(Vector3 leftTopCornerPosition, float lengthMultiplier, float heightMultiplier, Color color)
     {
@@ -15,6 +15,6 @@ public class Platform : MonoBehaviour
         var offset = leftTopCornerPosition - LeftTopPoint.position;
         this.transform.position += offset;
 
-        Material.color = color;
+        Renderer.material.color = color;
     }
 }
