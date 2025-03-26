@@ -106,7 +106,7 @@ public class MatchSystem : MonoBehaviour
         var nextDomino = Dominoes[lastConnectedDominoId + 1];
         if (nextDomino.IsNowInCollisionWithPreviousDomino)
         {
-            //TODO: ждём секунду чтобы игрок заметил прикосновение, а потом.
+            //TODO: ждём секунду чтобы игрок заметил прикосновение
 
             TryUnfreezeDominos();
 
@@ -138,7 +138,7 @@ public class MatchSystem : MonoBehaviour
         domino.Rigidbody.angularVelocity = _SecondFrozenDominoAngularVelocity;
     }
 
-    public bool CheckLoose(int countOfSpawnedDomino)
+    public bool CanDropOneMoreDomino(int countOfSpawnedDomino)
     {
         if (lastConnectedDominoId + CountOfDominoBetweenFrozenAndActiveDomino < countOfSpawnedDomino)
             return true;
