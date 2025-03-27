@@ -98,7 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 29c5b89f7af613d4e9210dbbb3d37004, type: 2}
     - target: {fileID: 7112698669121372538, guid: 4dee58e31acb6d64085192d29666e61d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112698669121372538, guid: 4dee58e31acb6d64085192d29666e61d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7243782406088237720, guid: 4dee58e31acb6d64085192d29666e61d, type: 3}
       propertyPath: m_Enabled

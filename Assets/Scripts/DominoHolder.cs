@@ -10,6 +10,8 @@ public class DominoHolder : MonoBehaviour
     private GameObject ActivePiece;
     [SerializeField] private Transform WorldOrigin;
     public UnityEvent OnDrop;
+    public int QueuedCounter = 0;
+    private bool IsWaiting = true;
 
     private void Start()
     {
@@ -32,12 +34,31 @@ public class DominoHolder : MonoBehaviour
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(Cooldown);
-        CreateDomino();
+        if (QueuedCounter > 0)
+        {
+            CreateDomino();
+            QueuedCounter--;
+        }
+        else
+        {
+            IsWaiting = true;
+        }
     }
 
     private void CreateDomino()
     {
         ActivePiece = Instantiate(Prefab, transform);
         IsHolding = true;
+        IsWaiting = false;
+    }
+
+    public void QueueDomino()
+    {
+        if (IsWaiting)
+        {
+            CreateDomino();
+            return;
+        }
+        QueuedCounter++;
     }
 }
