@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class MatchSystem : MonoBehaviour
     public int lastConnectedDominoId;
 
     public static int CountOfDominoBetweenFrozenAndActiveDomino = 5;
+
+    public event Action DominoAllowedSpawnInArm;
 
     public UnityEvent<int> CounterIncrement;
 
@@ -99,6 +102,8 @@ public class MatchSystem : MonoBehaviour
         lastConnectedDominoId++;
         CounterIncrement?.Invoke(lastConnectedDominoId);
 
+        DominoAllowedSpawnInArm?.Invoke();
+
         //Визуально выделяем две доминошки
         FirstFrozenDomino.Outline.enabled = true;
         SecondFrozenDomino.Outline.enabled = true;
@@ -165,6 +170,7 @@ public class MatchSystem : MonoBehaviour
     }
 
     public float CameraMoveSpeed;
+
     public IEnumerator CameraGoSmoothlyTo(Vector3 TargetCameraPosition)
     {
 
