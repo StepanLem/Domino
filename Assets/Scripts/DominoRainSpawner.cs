@@ -10,8 +10,17 @@ public class DominoRainSpawner : MonoBehaviour
     [SerializeField] private int initialCount;
     [SerializeField] private float initialSpan;
 
+    [Header("Color")]
+    public Gradient ColorGradient;
+    public MaterialColorController MaterialColorController;
+    public float GradientStepMultiplayer;
+    public float GradientStep = 0.03f;
+    private float _currentGradientPosition;
+
     void Start()
     {
+        _currentGradientPosition = Random.value;
+
         for (int i = 0; i < initialCount; i++)
         {
             Spawn(
@@ -27,6 +36,14 @@ public class DominoRainSpawner : MonoBehaviour
         var instance = Instantiate(domino, position + transform.position, Quaternion.Euler(rotation), transform);
         var rb = instance.GetComponent<Rigidbody>();
         rb.angularVelocity = angularVelocity;
+    }
+
+    private void Update()
+    {
+        _currentGradientPosition = (_currentGradientPosition + Time.deltaTime*GradientStepMultiplayer*GradientStep) % 1;
+        // Получаем цвет из градиента
+        Color gradientColor = ColorGradient.Evaluate(_currentGradientPosition);
+        MaterialColorController.SetColor(gradientColor*15);
     }
 
     private IEnumerator Drop()
