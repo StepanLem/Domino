@@ -289,7 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107737602103790526, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: distancePerStep
-      value: 1.4
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5708046746911021985, guid: f0e0f8cfa15ec0d4c871573413355c81, type: 3}
       propertyPath: m_Layer

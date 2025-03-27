@@ -29,7 +29,7 @@ public class DominoHolder : MonoBehaviour
         ActivePiece.GetComponent<DominoPiece>().Activate();
         ActivePiece.transform.parent = WorldOrigin;
         OnDrop?.Invoke();
-        OnDropX?.Invoke(ActivePiece.transform.position.x - transform.position.x);
+        OnDropX?.Invoke(ActivePiece.transform.position.x);
         StartCoroutine(Wait());
     }
 

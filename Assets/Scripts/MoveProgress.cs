@@ -18,13 +18,13 @@ public class MoveProgress : MonoBehaviour
     public void MoveOneStep(float deltaX)
     {
         IsStatic = false;
-        StartCoroutine(Move(0));
+        StartCoroutine(Move(deltaX));
     }
 
     private IEnumerator Move(float x)
     {
         float distance = 0;
-        var targetDistance = distancePerStep - x;
+        var targetDistance = x + distancePerStep - transform.position.x;
         Debug.Log($"d: {x} td: {targetDistance}");
         while (distance < targetDistance)
         {
