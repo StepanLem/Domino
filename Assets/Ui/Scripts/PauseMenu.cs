@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private UIElement self;
     [SerializeField] private CancelEvent cancelEvent;
+    [SerializeField] private Fade fade;
     public void Open()
     {
         if (!self.isActiveAndEnabled)
@@ -21,7 +22,12 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        fade.SmoothSceneTransistion("MainMenu");
+    }
+
+    public void Restart()
+    {
+        fade.SmoothSceneTransistion("Main");
     }
 
     public void Resume()

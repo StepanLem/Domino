@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Image Tint;
+    [SerializeField] private Fade fade;
     [SerializeField] private float fadeRate;
     [SerializeField] private int counter = 0;
     [SerializeField] private List<GameObject> dialogue;
+    [SerializeField] private TMP_Text maxScore;
     public void Play()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Main");
+        fade.SmoothSceneTransistion("Main");
     }
 
     public void Exit()
@@ -34,15 +36,6 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1.0f;
-        StartCoroutine(Fade());
-    }
-
-    private IEnumerator Fade()
-    {
-        while (Tint.color.a > 0)
-        {
-            Tint.color = new Color(Tint.color.r, Tint.color.g, Tint.color.b, Mathf.Max(Tint.color.a - Time.deltaTime * fadeRate, 0));
-            yield return new WaitForEndOfFrame();
-        }
+        maxScore.text = "Максимальный счёт: " + PlayerPrefs.GetInt("MaxScore", 0);
     }
 }

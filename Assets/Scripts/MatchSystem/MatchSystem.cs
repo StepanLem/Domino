@@ -104,6 +104,7 @@ public class MatchSystem : MonoBehaviour
 
             //Увеличиваем счётчик коснувшихся домино.
             lastConnectedDominoId = Domino2.ID;
+            Debug.Log("Очень ненадёжный счётчик, что если коснулись домино откуда-то позади? Или домино стали сталкиваться в обратном направлении?");
             CounterIncrement?.Invoke(lastConnectedDominoId);
 
             DominoAllowedSpawnInArm?.Invoke();
