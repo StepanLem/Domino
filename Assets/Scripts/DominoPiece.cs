@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class DominoPiece : MonoBehaviour
 {
     [SerializeField] public LeftToRightMover _rb;
+    [SerializeField] public MaterialColorController _mcc;
 
     public Rigidbody Rigidbody;
     public Outline Outline;
@@ -43,6 +44,7 @@ public class DominoPiece : MonoBehaviour
             _hadTouchedGround = true;
             MatchSystem.Instance.HandleNewDominoTouchGround(this);
             OnHitGround?.Invoke();
+            _mcc.SetColor(Color.red * 25);
         }
 
         if (!_wasTouchedByPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
