@@ -1581,6 +1581,7 @@ GameObject:
   - component: {fileID: 1264375901974591501}
   - component: {fileID: 5014968489442255852}
   - component: {fileID: 146111710099740046}
+  - component: {fileID: 8435164628684848097}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1648,6 +1649,22 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 7499582235901114609}
   cancel: {fileID: 2505544378485714328}
   save: {fileID: 38177811352445875}
+  cancelEvent: {fileID: 8435164628684848097}
+--- !u!114 &8435164628684848097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676246448238579444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e45a89391985f45b9c48670b421b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7812983550748545961
 GameObject:
   m_ObjectHideFlags: 0

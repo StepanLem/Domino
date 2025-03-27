@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera
   - Water
   - UI
   - Ground
   - Domino
   - Sasdasdads
-  - 
+  - IgnoreSelf
   - 
   - 
   - 
