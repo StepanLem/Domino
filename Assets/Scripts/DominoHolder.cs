@@ -10,6 +10,7 @@ public class DominoHolder : MonoBehaviour
     private GameObject ActivePiece;
     [SerializeField] private Transform WorldOrigin;
     public UnityEvent OnDrop;
+    public UnityEvent<float> OnDropX;
     public int QueuedCounter = 0;
     private bool IsWaiting = true;
 
@@ -28,6 +29,7 @@ public class DominoHolder : MonoBehaviour
         ActivePiece.GetComponent<DominoPiece>().Activate();
         ActivePiece.transform.parent = WorldOrigin;
         OnDrop?.Invoke();
+        OnDropX?.Invoke(ActivePiece.transform.position.x - transform.position.x);
         StartCoroutine(Wait());
     }
 
@@ -52,6 +54,7 @@ public class DominoHolder : MonoBehaviour
         IsWaiting = false;
     }
 
+    [ContextMenu("Queue")]
     public void QueueDomino()
     {
         if (IsWaiting)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveProgress : MonoBehaviour
@@ -14,19 +15,21 @@ public class MoveProgress : MonoBehaviour
 
     private Vector3 MovementDirecation => Vector3.right;
 
-    public void MoveOneStep()
+    public void MoveOneStep(float deltaX)
     {
         IsStatic = false;
-        StartCoroutine(Move());
+        StartCoroutine(Move(deltaX));
     }
 
-    private IEnumerator Move()
+    private IEnumerator Move(float x)
     {
         float distance = 0;
-        while (distance < distancePerStep)
+        var targetDistance = distancePerStep - x;
+        Debug.Log($"d: {x} td: {targetDistance}");
+        while (distance < targetDistance)
         {
             var velocity = distancePerFrame * MovementDirecation;
-            distance = Mathf.Min(distancePerStep, distance + velocity.magnitude);
+            distance = Mathf.Min(targetDistance, distance + velocity.magnitude);
             transform.position += velocity;
             yield return new WaitForFixedUpdate();
         }
