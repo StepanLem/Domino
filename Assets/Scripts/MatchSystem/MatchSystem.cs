@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,7 +20,7 @@ public class MatchSystem : MonoBehaviour
 
     public List<DominoPiece> Dominoes; //упорядоченный список домино слева направо.
 
-    public int lastConnectedDominoId;
+    [NonSerialized] public int lastConnectedDominoId;
 
     public static int CountOfDominoBetweenFrozenAndActiveDomino = 5;
 
@@ -31,10 +32,11 @@ public class MatchSystem : MonoBehaviour
     {
         Dominoes.Add(activeDomino);
         activeDomino.ID = Dominoes.Count - 1;
-        
-        if(Dominoes.Count == 1)
+
+        if (Dominoes.Count == 1)
         {
             lastConnectedDominoId = 0;
+            activeDomino.IsInChain = true;
         }
         if (Dominoes.Count == CountOfDominoBetweenFrozenAndActiveDomino)
         {
@@ -43,114 +45,101 @@ public class MatchSystem : MonoBehaviour
             var force = 50f;
             Dominoes[0].Rigidbody.AddForceAtPosition(direction * force, forcePosition);
         }
-        
+
     }
+
+    public List<DominoPiece> FrozenDominoes;
 
     public void TryUnfreezeDominos()
     {
-        if (Dominoes.Count > CountOfDominoBetweenFrozenAndActiveDomino)
+        if (Dominoes.Count >= CountOfDominoBetweenFrozenAndActiveDomino)
         {
-            if (FirstFrozenDomino == null || SecondFrozenDomino == null)
-            {
-                Debug.LogError("Нельзя давать игроку ставить новые фигуры, пока старые не коснулись");
+            if (FrozenDominoes.Count != 2)
                 return;
-            }
 
-            UnfreezeDominoes(FirstFrozenDomino, SecondFrozenDomino);
+            var domino1 = FrozenDominoes[0];
+            var domino2 = FrozenDominoes[1];
+            UnfreezeDominoes(domino1, domino2);
 
             //отключаем шейдер, делающий обводку для обоих
-            FirstFrozenDomino.Outline.enabled = false;
-            SecondFrozenDomino.Outline.enabled = false;
+            domino1.Outline.enabled = false;
+            domino2.Outline.enabled = false;
 
             //Аудио
             //TODO: звук отмораживания.
 
-
-            FirstFrozenDomino = null;
-            SecondFrozenDomino = null;
+            FrozenDominoes.Remove(domino1);
+            FrozenDominoes.Remove(domino2);
         }
     }
 
-    private DominoPiece FirstFrozenDomino;
-    private DominoPiece SecondFrozenDomino;
+    public Dictionary<int, int> frozenDominoContainsTimesInFrozenPairsByID = new();
+    public List<(DominoPiece, DominoPiece)> NextPairToFrezze = new();
 
-    //запомненная скорость двух замороженных домино.
-    private Vector3 _FirstFrozenDominoLinearVelocity;
-    private Vector3 _FirstFrozenDominoAngularVelocity;
-    private Vector3 _SecondFrozenDominoLinearVelocity;
-    private Vector3 _SecondFrozenDominoAngularVelocity;
 
-    public void HandleDominoFirstTouchWithPrevious(DominoPiece previousDomino, DominoPiece currentDomino)
+    public void HandleDominoTouch(DominoPiece Domino1, DominoPiece Domino2)
     {
-        if (previousDomino.ID != lastConnectedDominoId)
+        while (true)
         {
-            //коснулся заранее.
+            if (FrozenDominoes.Count > 2)
+            {
+                UnfreezDomino(FrozenDominoes[0]);
+                FrozenDominoes[0].Outline.enabled = false;
+                FrozenDominoes.RemoveAt(0);
+            }
+            else break;
 
-            Debug.Log("Вот этой фигни быть не должно. Неправильно будет работать при следующем взаимодействии. " +
-                "Рассмотрите как это произошло?");
-            //скорее всего это произошло если игрок соеденил домино в середине игры сам. А значит мог уронить.
-            //+ тут внутри переменные сохраняют состояние. может быть ошибка.
-            return;
         }
-
-        FirstFrozenDomino = previousDomino;
-        SecondFrozenDomino = currentDomino;
-
-        FreezeDominoes(FirstFrozenDomino, SecondFrozenDomino);
-
-        //Увеличиваем счётчик коснувшихся домино.
-        lastConnectedDominoId++;
-        CounterIncrement?.Invoke(lastConnectedDominoId);
-
-        DominoAllowedSpawnInArm?.Invoke();
-
-        //Визуально выделяем две доминошки
-        FirstFrozenDomino.Outline.enabled = true;
-        SecondFrozenDomino.Outline.enabled = true;
-
-        var nextDomino = Dominoes[lastConnectedDominoId + 1];
-        if (nextDomino.IsNowInCollisionWithPreviousDomino)
+        if (Domino1.IsInChain && !Domino2.IsInChain)
         {
-            //TODO: ждём секунду чтобы игрок заметил прикосновение
+            FreezeDominoes(Domino1, Domino2);
 
-            TryUnfreezeDominos();
+            Domino1.Outline.enabled = true;
+            Domino2.Outline.enabled = true;
 
-            HandleDominoFirstTouchWithPrevious(currentDomino, nextDomino);
+            Domino2.IsInChain = true;
+
+            FrozenDominoes.Add(Domino1);
+            FrozenDominoes.Add(Domino2);
+
+            //Увеличиваем счётчик коснувшихся домино.
+            lastConnectedDominoId = Domino2.ID;
+            CounterIncrement?.Invoke(lastConnectedDominoId);
+
+            DominoAllowedSpawnInArm?.Invoke();
         }
     }
 
-    public void FreezeDominoes(DominoPiece previousDomino, DominoPiece domino)
+    private void UnfreezDomino(DominoPiece Domino)
+    {
+        Domino.Rigidbody.isKinematic = false;
+        Domino.Rigidbody.linearVelocity = Domino.LinearVelocityBeforeFrozen;
+        Domino.Rigidbody.angularVelocity = Domino.AngularVelocityBeforeFrozen;
+    }
+
+    public void FreezeDominoes(DominoPiece Domino1, DominoPiece Domino2)
     {
         //запоминаем скорость перед заморозкой домино.
-        _FirstFrozenDominoLinearVelocity = previousDomino.Rigidbody.linearVelocity;
-        _FirstFrozenDominoAngularVelocity = previousDomino.Rigidbody.angularVelocity;
-        _SecondFrozenDominoLinearVelocity = previousDomino.Rigidbody.linearVelocity;
-        _SecondFrozenDominoAngularVelocity = previousDomino.Rigidbody.angularVelocity;
+        Domino1.LinearVelocityBeforeFrozen = Domino1.Rigidbody.linearVelocity;
+        Domino1.AngularVelocityBeforeFrozen = Domino1.Rigidbody.angularVelocity;
+        Domino2.LinearVelocityBeforeFrozen = Domino2.Rigidbody.linearVelocity;
+        Domino2.AngularVelocityBeforeFrozen = Domino2.Rigidbody.angularVelocity;
 
         //замораживаем
-        previousDomino.Rigidbody.isKinematic = true;
-        domino.Rigidbody.isKinematic = true;
+        Domino1.Rigidbody.isKinematic = true;
+        Domino2.Rigidbody.isKinematic = true;
     }
 
-    public void UnfreezeDominoes(DominoPiece previousDomino, DominoPiece domino)
+    public void UnfreezeDominoes(DominoPiece Domino1, DominoPiece Domino2)
     {
-        previousDomino.Rigidbody.isKinematic = false;
-        domino.Rigidbody.isKinematic = false;
+        Domino1.Rigidbody.isKinematic = false;
+        Domino2.Rigidbody.isKinematic = false;
 
-        previousDomino.Rigidbody.linearVelocity = _FirstFrozenDominoLinearVelocity;
-        previousDomino.Rigidbody.angularVelocity = _FirstFrozenDominoAngularVelocity;
-        domino.Rigidbody.linearVelocity = _SecondFrozenDominoLinearVelocity;
-        domino.Rigidbody.angularVelocity = _SecondFrozenDominoAngularVelocity;
+        Domino1.Rigidbody.linearVelocity = Domino1.LinearVelocityBeforeFrozen;
+        Domino1.Rigidbody.angularVelocity = Domino1.AngularVelocityBeforeFrozen;
+        Domino2.Rigidbody.linearVelocity = Domino2.LinearVelocityBeforeFrozen;
+        Domino2.Rigidbody.angularVelocity = Domino2.AngularVelocityBeforeFrozen;
     }
-
-    public bool CanDropOneMoreDomino(int countOfSpawnedDomino)
-    {
-        if (lastConnectedDominoId + CountOfDominoBetweenFrozenAndActiveDomino < countOfSpawnedDomino)
-            return true;
-
-        return false;
-    }
-
     #region CameraLogic(didnt used)
     public Transform Camera;
 

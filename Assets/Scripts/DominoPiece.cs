@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +15,13 @@ public class DominoPiece : MonoBehaviour
 
     private bool _hadTouchedGround;
     private bool _wasTouchedByPreviousDomino;
-    public bool IsNowInCollisionWithPreviousDomino;
+    [NonSerialized] public bool IsInChain;
+    [NonSerialized] public bool IsNowInCollisionWithPreviousDomino;
+    [NonSerialized] public List<int> OffsetsToCurrentlyTouchedDominoes = new();
+
+    public bool IsFrozen;
+    public Vector3 LinearVelocityBeforeFrozen;
+    public Vector3 AngularVelocityBeforeFrozen;
 
     public int ID;
 
@@ -47,21 +50,28 @@ public class DominoPiece : MonoBehaviour
             _mcc.SetColor(collision.gameObject.GetComponent<Renderer>().material.color * 25);
         }
 
-        if (!_wasTouchedByPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
         {
-            collision.gameObject.TryGetComponent<DominoPiece>(out var previousDomino);
-            if (previousDomino.ID + 1 == this.ID)
-            {
-                IsNowInCollisionWithPreviousDomino = true;
-                _wasTouchedByPreviousDomino = true;
-                MatchSystem.Instance.HandleDominoFirstTouchWithPrevious(previousDomino, this);
-                OnPieceImpact?.Invoke();
-            }
+            collision.gameObject.TryGetComponent<DominoPiece>(out var otherDomino);
+            int offsetToID = otherDomino.ID - this.ID;
+            OffsetsToCurrentlyTouchedDominoes.Add(offsetToID);
+            OnPieceImpact?.Invoke();
+
+            MatchSystem.Instance.HandleDominoTouch(otherDomino, this);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
+        {
+            collision.gameObject.TryGetComponent<DominoPiece>(out var otherDomino);
+
+            int offsetToID = otherDomino.ID - this.ID;
+            if (OffsetsToCurrentlyTouchedDominoes.Contains(offsetToID))
+                OffsetsToCurrentlyTouchedDominoes.Remove(offsetToID);
+        }
+
         if (!IsNowInCollisionWithPreviousDomino && collision.gameObject.layer == LayerMask.NameToLayer("Domino"))
         {
             collision.gameObject.TryGetComponent<DominoPiece>(out var previousDomino);
