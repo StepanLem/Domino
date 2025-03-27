@@ -18,7 +18,7 @@ public class MoveProgress : MonoBehaviour
     public void MoveOneStep(float deltaX)
     {
         IsStatic = false;
-        StartCoroutine(Move(deltaX));
+        StartCoroutine(Move(0));
     }
 
     private IEnumerator Move(float x)
