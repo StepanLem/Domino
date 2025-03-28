@@ -77,6 +77,8 @@ public class MatchSystem : MonoBehaviour
     public List<(DominoPiece, DominoPiece)> NextPairToFrezze = new();
 
 
+    public UnityEvent OnFreeze;
+    
     public void HandleDominoTouch(DominoPiece Domino1, DominoPiece Domino2)
     {
         while (true)
@@ -96,6 +98,8 @@ public class MatchSystem : MonoBehaviour
 
             Domino1.Outline.enabled = true;
             Domino2.Outline.enabled = true;
+
+            OnFreeze?.Invoke();
 
             Domino2.IsInChain = true;
 
