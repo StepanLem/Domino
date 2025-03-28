@@ -10,6 +10,6 @@ PhysicsMaterial:
   serializedVersion: 2
   m_DynamicFriction: 19000
   m_StaticFriction: 177.12
-  m_Bounciness: 0
+  m_Bounciness: 0.23
   m_FrictionCombine: 3
-  m_BounceCombine: 2
+  m_BounceCombine: 0

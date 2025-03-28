@@ -51,7 +51,9 @@ public class DominoPiece : MonoBehaviour
             _hadTouchedGround = true;
             MatchSystem.Instance.HandleNewDominoTouchGround(this);
             OnHitGround?.Invoke();
-            _mcc.SetColor(collision.gameObject.GetComponent<Renderer>().material.color * 25);
+            var materialColor = collision.gameObject.GetComponent<Renderer>().material.color;
+            _mcc.SetColor(materialColor * 25);
+            Camera.main.backgroundColor = materialColor + new Color(0.5f, 0.5f, 0.5f);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Domino"))

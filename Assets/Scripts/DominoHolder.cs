@@ -8,7 +8,7 @@ public class DominoHolder : MonoBehaviour
     [SerializeField] private float StartAfter;
     [SerializeField] private GameObject Prefab;
     private bool IsHolding;
-    private GameObject ActivePiece;
+    public GameObject ActivePiece;
     [SerializeField] private Transform WorldOrigin;
     public UnityEvent OnDrop;
     public UnityEvent<float> OnDropX;
