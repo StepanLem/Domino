@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DominoPiece : MonoBehaviour
 {
     [SerializeField] public LeftToRightMover _rb;
+    [SerializeField] public DownMovement _down;
     [SerializeField] public MaterialColorController _mcc;
 
     public Rigidbody Rigidbody;
@@ -28,15 +29,18 @@ public class DominoPiece : MonoBehaviour
     private void Reset()
     {
         _rb = GetComponent<LeftToRightMover>();
+        _down = GetComponent<DownMovement>();
     }
 
     private void Start()
     {
         _rb.enabled = true;
+        _down.enabled = true;
     }
 
     public void Activate()
     {
+        _down.enabled = false;
         _rb.enabled = false;
     }
 

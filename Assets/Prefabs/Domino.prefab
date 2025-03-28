@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 8006810876456208167}
   - component: {fileID: 3918301105368442103}
   - component: {fileID: 8302282456867301645}
+  - component: {fileID: 7550708744590585053}
   m_Layer: 7
   m_Name: Domino
   m_TagString: Untagged
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 454574445036861828}
+  _down: {fileID: 7550708744590585053}
   _mcc: {fileID: 11400000, guid: af8548d48c886534fb4c93b6d748d843, type: 2}
   Rigidbody: {fileID: 8220479910777783599}
   Outline: {fileID: 4228243817496552466}
@@ -570,7 +572,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  IsNowInCollisionWithPreviousDomino: 0
+  IsFrozen: 0
+  LinearVelocityBeforeFrozen: {x: 0, y: 0, z: 0}
+  AngularVelocityBeforeFrozen: {x: 0, y: 0, z: 0}
   ID: 0
 --- !u!54 &8220479910777783599
 Rigidbody:
@@ -1003,3 +1007,16 @@ MonoBehaviour:
   - {fileID: 8940981357920613059, guid: 7d465a8270214414a8927d19da85571b, type: 3}
   - {fileID: 8940981357920613059, guid: 5b971bfbd70f5f34daa5c7609146c426, type: 3}
   - {fileID: 8940981357920613059, guid: 03ff8e1c97aa53e44a0d51159bd92968, type: 3}
+--- !u!114 &7550708744590585053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177914617516068725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9916fdfa2857e584b895078f17f5f757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 1
