@@ -28,6 +28,9 @@ public class MatchSystem : MonoBehaviour
 
     public UnityEvent<int> CounterIncrement;
 
+    [SerializeField] private float minLinearVelocity;
+    [SerializeField] private float minAngularVelocity;
+
     public void HandleNewDominoTouchGround(DominoPiece activeDomino)
     {
         Dominoes.Add(activeDomino);
@@ -139,6 +142,26 @@ public class MatchSystem : MonoBehaviour
     {
         Domino1.Rigidbody.isKinematic = false;
         Domino2.Rigidbody.isKinematic = false;
+
+        DominoPiece right = null;
+        if (Domino1.transform.position.x > Domino2.transform.position.x)
+        {
+            right = Domino1;
+        }
+        else
+        {
+            right = Domino2;
+        }
+
+        if (right.AngularVelocityBeforeFrozen.magnitude < minAngularVelocity)
+        {
+            var forcePosition = Dominoes[0].transform.position + new Vector3(0, 0.5f, 0);
+            var direction = new Vector3(1, 0, 0);
+            var force = 15f;
+            right.Rigidbody.AddForceAtPosition(direction * force, forcePosition);
+        }
+
+        Debug.Log("a: " + right.AngularVelocityBeforeFrozen.magnitude + "l: " + right.LinearVelocityBeforeFrozen.magnitude);
 
         Domino1.Rigidbody.linearVelocity = Domino1.LinearVelocityBeforeFrozen;
         Domino1.Rigidbody.angularVelocity = Domino1.AngularVelocityBeforeFrozen;

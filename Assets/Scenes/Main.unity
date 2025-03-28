@@ -773,6 +773,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  minLinearVelocity: 0.3
+  minAngularVelocity: 0.2
   FrozenDominoes: []
   OnFreeze:
     m_PersistentCalls:
@@ -1503,7 +1505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 3
-  WarnTime: 0.3
+  WarnTime: 0.8
   holder: {fileID: 1685051055}
 --- !u!82 &1685051059
 AudioSource:
@@ -1966,12 +1968,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 520.5
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2013,10 +2015,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2070674975}
+  - {fileID: 8846582612068933749}
   - {fileID: 176408945}
   - {fileID: 1246835498}
   - {fileID: 1127591478}
-  - {fileID: 8846582612068933749}
   - {fileID: 1704974665}
   - {fileID: 566618983}
   m_Father: {fileID: 0}
@@ -3176,6 +3178,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7051299229625012349, guid: 526f6487e040fba439f2241c68ae512e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040507220433181706, guid: 526f6487e040fba439f2241c68ae512e, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8700767020317881804, guid: 526f6487e040fba439f2241c68ae512e, type: 3}

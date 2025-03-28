@@ -37,6 +37,7 @@ public class DominoHolder : MonoBehaviour
         }
         IsHolding = false;
         ActivePiece.GetComponent<DominoPiece>().Activate();
+        ActivePiece.GetComponent<DropWarning>().enabled = false;
         ActivePiece.transform.parent = WorldOrigin;
         OnDrop?.Invoke();
         OnDropX?.Invoke(ActivePiece.transform.position.x);
